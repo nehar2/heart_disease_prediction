@@ -1,0 +1,19 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	format_input_data
+	1
+
+[Fri Jul 17 14:57:39 2020]
+rule format_input_data:
+    input: input_data/processed.cleveland.data, input_data/processed.hungarian.data, input_data/processed.switzerland.data, input_data/processed.va.data
+    output: input_data/heart_disease_data_formatted.csv
+    jobid: 0
+
+[Fri Jul 17 14:57:40 2020]
+Finished job 0.
+1 of 1 steps (100%) done
+Complete log: /Users/neha/Horizon/Horizon_Project/Heart_Disease/.snakemake/log/2020-07-17T145739.284065.snakemake.log

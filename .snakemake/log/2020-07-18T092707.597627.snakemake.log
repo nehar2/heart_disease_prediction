@@ -1,0 +1,19 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	decision_tree_cross_validation
+	1
+
+[Sat Jul 18 09:27:07 2020]
+rule decision_tree_cross_validation:
+    input: output_data/heart_disease_data_x_train.csv, output_data/heart_disease_data_y_train.csv
+    output: output_cv/decision_tree_cross_validation.csv
+    jobid: 0
+
+[Sat Jul 18 09:27:11 2020]
+Finished job 0.
+1 of 1 steps (100%) done
+Complete log: /Users/neha/Horizon/Horizon_Project/Heart_Disease/.snakemake/log/2020-07-18T092707.597627.snakemake.log

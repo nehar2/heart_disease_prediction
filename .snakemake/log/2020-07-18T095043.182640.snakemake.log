@@ -1,0 +1,26 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	random_forest_cross_validation
+	1
+
+[Sat Jul 18 09:50:43 2020]
+rule random_forest_cross_validation:
+    input: output_data/heart_disease_data_x_train.csv, output_data/heart_disease_data_y_train.csv
+    output: output_cv/random_forest_cross_validation.csv
+    jobid: 0
+
+[Sat Jul 18 09:50:44 2020]
+Error in rule random_forest_cross_validation:
+    jobid: 0
+    output: output_cv/random_forest_cross_validation.csv
+    shell:
+        python random_forest_cross_validation.py
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /Users/neha/Horizon/Horizon_Project/Heart_Disease/.snakemake/log/2020-07-18T095043.182640.snakemake.log

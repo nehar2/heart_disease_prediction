@@ -1,0 +1,7 @@
+Building DAG of jobs...
+MissingInputException in line 2 of /Users/neha/Horizon/Horizon_Project/Heart_Disease/Snakefile:
+Missing input files for rule format_input_data:
+input_data/processed.va.data.csv
+input_data/processed.switzerland.data.csv
+input_data/processed.cleveland.data.csv
+input_data/processed.hungarian.data.csv
