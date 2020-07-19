@@ -5,7 +5,7 @@ from statistics import median
 
 ### CLEVELAND DATA ###
 cleveland = pd.read_csv('input_data/processed.cleveland.data', header=None, na_values='?')
-cleveland['origin']='cleveland'
+cleveland['origin']='Cleveland'
 
 cleveland_missing_values = {'column':[], 'total_missing':[], 'percent_missing':[]}
 for column in range(0,14):
@@ -21,7 +21,7 @@ cleveland_replaced = cleveland.fillna(cleveland.median())
 
 ### HUNGARY DATA ###
 hungary = pd.read_csv('input_data/processed.hungarian.data', header=None, na_values='?')
-hungary['origin']='hungary'
+hungary['origin']='Hungary'
 hungary_missing_values = {'column':[], 'total_missing':[], 'percent_missing':[]}
 for column in range(0,14):
     total_missing = hungary[column].isnull().sum()
@@ -36,7 +36,7 @@ hungary_replaced = hungary.fillna(hungary.median())
 
 ### SWITZERLAND DATA ###
 switzerland = pd.read_csv('input_data/processed.switzerland.data', header=None, na_values='?')
-switzerland['origin']='switzerland'
+switzerland['origin']='Switzerland'
 switzerland_missing_values = {'column':[], 'total_missing':[], 'percent_missing':[]}
 for column in range(0,14):
     total_missing = switzerland[column].isnull().sum()
@@ -51,7 +51,7 @@ switzerland_replaced = switzerland.fillna(switzerland.median())
 
 ### VIRGINIA DATA ###
 virginia = pd.read_csv('input_data/processed.va.data', header=None, na_values='?')
-virginia['origin']='virginia'
+virginia['origin']='Virginia'
 virginia_missing_values = {'column':[], 'total_missing':[], 'percent_missing':[]}
 for column in range(0,14):
     total_missing = virginia[column].isnull().sum()

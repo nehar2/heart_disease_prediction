@@ -10,14 +10,9 @@ warnings.filterwarnings('ignore')
 x_train = pd.read_csv('output_data/heart_disease_data_x_train.csv', index_col='patientid_train')
 y_train = pd.read_csv('output_data/heart_disease_data_y_train.csv', index_col='patientid_train')
 
-x_train = x_train.drop('origin', axis=1)
-x_test = x_test.drop('origin', axis=1)
-
-print(y_train['num'].value_counts())
+# x_train = x_train.drop('origin', axis=1)
 
 cross_validation = {'kernel':[], 'cost':[], 'train_recall':[], 'train_precision':[], 'test_recall':[], 'test_precision':[]}
-
-print(x_train.columns)
 
 for cost in range(1,5):
     cost = cost/10
@@ -26,9 +21,6 @@ for cost in range(1,5):
         cross_val_object = cross_validate(clf, x_train, y_train['num'], cv=15, scoring=('recall_weighted', 'precision_weighted'), return_train_score=True)
         cross_validation['kernel'].append(kernel)
         cross_validation['cost'].append(cost)
-
-        print(cross_val_object.keys())
-
         cross_validation['train_recall'].append(cross_val_object['train_recall_weighted'].mean())
         cross_validation['train_precision'].append(cross_val_object['train_precision_weighted'].mean())
         cross_validation['test_recall'].append(cross_val_object['test_recall_weighted'].mean())

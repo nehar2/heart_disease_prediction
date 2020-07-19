@@ -3,10 +3,6 @@ import pandas as pd
 import sklearn
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import cross_validate
-# import warnings
-# import pdb
-
-# warnings.filterwarnings('ignore')
 
 x_train = pd.read_csv('output_data/heart_disease_data_x_train.csv', index_col='patientid_train')
 y_train = pd.read_csv('output_data/heart_disease_data_y_train.csv', index_col='patientid_train')
