@@ -29,3 +29,16 @@ rule svm_cross_validation:
 	output: 'output_cv/svm_cross_validation.csv'
 	shell: 'python svm_cross_validation.py'
 
+rule adaptive_boosting_cross_validation:
+	input: 'output_data/heart_disease_data_x_train.csv', 'output_data/heart_disease_data_y_train.csv'
+	output: 'output_cv/adaptive_boosting_cross_validation.csv'
+	shell: 'python adaptive_boosting_cross_validation.py'
+
+rule combined_results:
+	input: 
+		'output_cv/decision_tree_cross_validation.csv', 'output_cv/random_forest_cross_validation.csv', 
+		'output_cv/svm_cross_validation.csv', 'output_cv/adaptive_boosting_cross_validation.csv'
+	output: 'output_cv/combined_results.csv'
+	shell: 'python combined_results.py'
+
+
