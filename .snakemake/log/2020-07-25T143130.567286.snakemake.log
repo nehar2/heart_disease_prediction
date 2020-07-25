@@ -1,0 +1,61 @@
+Building DAG of jobs...
+Job counts:
+	count	jobs
+	1	adaptive_boosting_cross_validation
+	1	decision_tree_cross_validation
+	4	heatmap_cross_validation
+	1	heatmap_generate_results
+	1	random_forest_cross_validation
+	1	svm_cross_validation
+	1	train_test_split
+	10
+
+[Sat Jul 25 14:31:30 2020]
+rule train_test_split:
+    input: input_data/heart_disease_data_formatted.csv
+    output: output_data/heart_disease_data_x_train.csv, output_data/heart_disease_data_x_test.csv, output_data/heart_disease_data_y_train.csv, output_data/heart_disease_data_y_test.csv
+    jobid: 9
+
+
+[Sat Jul 25 14:31:30 2020]
+rule decision_tree_cross_validation:
+    input: output_data/heart_disease_data_x_train.csv, output_data/heart_disease_data_y_train.csv
+    output: output_cv/decision_tree_cross_validation.csv
+    jobid: 5
+
+
+[Sat Jul 25 14:31:30 2020]
+rule svm_cross_validation:
+    input: output_data/heart_disease_data_x_train.csv, output_data/heart_disease_data_y_train.csv
+    output: output_cv/svm_cross_validation.csv
+    jobid: 7
+
+
+[Sat Jul 25 14:31:30 2020]
+rule random_forest_cross_validation:
+    input: output_data/heart_disease_data_x_train.csv, output_data/heart_disease_data_y_train.csv
+    output: output_cv/random_forest_cross_validation.csv
+    jobid: 6
+
+
+[Sat Jul 25 14:31:30 2020]
+rule adaptive_boosting_cross_validation:
+    input: output_data/heart_disease_data_x_train.csv, output_data/heart_disease_data_y_train.csv
+    output: output_cv/adaptive_boosting_cross_validation.csv
+    jobid: 8
+
+
+[Sat Jul 25 14:31:30 2020]
+rule heatmap_cross_validation:
+    input: output_cv/decision_tree_cross_validation.csv
+    output: charts/decision_tree_heatmap.png
+    jobid: 1
+    wildcards: algorithm=decision_tree
+
+RuleException in line 56 of /Users/neha/Horizon/Horizon_Project/Heart_Disease/Snakefile:
+NameError: The name 'algorithm' is unknown in this context. Please make sure that you defined that variable. Also note that braces not used for variable access have to be escaped by repeating them, i.e. {{print $1}}
+  File "/Users/neha/opt/anaconda3/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 115, in run_jobs
+  File "/Users/neha/opt/anaconda3/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 120, in run
+  File "/Users/neha/opt/anaconda3/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 131, in _run
+  File "/Users/neha/opt/anaconda3/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 151, in printjob
+  File "/Users/neha/opt/anaconda3/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 137, in printjob

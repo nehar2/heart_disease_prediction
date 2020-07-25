@@ -1,5 +1,5 @@
 
-import seaborn as sns
+import seaborn as sb
 import matplotlib.pyplot as plt
 import pandas as pd
 
@@ -10,9 +10,11 @@ data.loc[data['num']==2, 'num'] = 'Moderate'
 data.loc[data['num']==3, 'num'] = 'High'
 data.loc[data['num']==4, 'num'] = 'Severe'
 
-sns.set(style='whitegrid')
-sns.countplot(data=data, x='num', hue='origin')
+sb.set(style='whitegrid')
+sb.countplot(data=data, x='num', hue='origin')
+plt.title('Heart Disease Prediction Values')
 plt.xlabel('Likelihood of Presence of Heart Disease')
 plt.ylabel('Number of Patients')
+plt.legend().set_title('Key (Origin)')
 
 plt.savefig('charts/prediction_values.png')

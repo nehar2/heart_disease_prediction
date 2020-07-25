@@ -7,7 +7,7 @@ from sklearn.model_selection import cross_validate
 x_train = pd.read_csv('output_data/heart_disease_data_x_train.csv', index_col='patientid_train')
 y_train = pd.read_csv('output_data/heart_disease_data_y_train.csv', index_col='patientid_train')
 
-x_train['origin'] = x_train['origin'].astype('category')
+x_train = x_train.astype('category')
 
 cross_validation = {'min_samples_split':[], 'n_estimators':[], 'criterion':[], 'bootstrap':[], 'train_recall':[], 'train_precision':[], 'test_recall':[], 'test_precision':[]}
 

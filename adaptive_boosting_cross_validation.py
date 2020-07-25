@@ -8,8 +8,6 @@ from sklearn import tree
 x_train = pd.read_csv('output_data/heart_disease_data_x_train.csv', index_col='patientid_train')
 y_train = pd.read_csv('output_data/heart_disease_data_y_train.csv', index_col='patientid_train')
 
-x_train = x_train.drop('origin', axis=1)
-
 cross_validation = {'n_estimators':[], 'max_depth':[], 'learning_rate':[], 'train_recall':[], 'train_precision':[], 'test_recall':[], 'test_precision':[]}
 
 for n_estimators in range (10,15):

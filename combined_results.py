@@ -1,18 +1,25 @@
 
 import pandas as pd
 
-svm = pd.read_csv('output_cv/svm_cross_validation.csv')
-svm['model']='SVM'
+decisiontree = pd.read_csv('output_cv/decision_tree_cross_validation.csv')
+decisiontree['algorithm']='Decision_Tree'
+
+'''
+randomforest = pd.read_csv('output_cv/random_forest_cross_validation.csv')
+randomforest['algorithm']='Random_Forest'
+'''
 
 adaboost = pd.read_csv('output_cv/adaptive_boosting_cross_validation.csv')
-adaboost['model']='Adaptive_Boosting'
+adaboost['algorithm']='Adaptive_Boosting'
 
-randomforest = pd.read_csv('output_cv/random_forest_cross_validation.csv')
-randomforest['model']='Random_Forest'
+'''
+xgboost = pd.read_csv('output_cv/extreme_gradient_boosting_cross_validation.csv')
+xgboost['algorithm']='Extreme_Gradient_Boosting'
+'''
 
-decisiontree = pd.read_csv('output_cv/decision_tree_cross_validation.csv')
-decisiontree['model']='Decision_Tree'
+svm = pd.read_csv('output_cv/svm_cross_validation.csv')
+svm['algorithm']='SVM'
 
-combined_cross_validation_data = pd.concat([svm, adaboost, randomforest, decisiontree])
+combined_cross_validation_data = pd.concat([decisiontree, adaboost, svm])
 combined_cross_validation_data.to_csv('output_cv/combined_results.csv', index=None)
 
