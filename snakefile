@@ -56,9 +56,9 @@ rule combined_results:
 rule heatmap_cross_validation:
 	input: 'output_cv/{algorithm}_cross_validation.csv'
 	output: 'charts/{algorithm}_heatmap.png'
-	shell: 'python heatmap_cross_validation.py --algorithm {wildcard.algorithm}'
+	shell: 'python heatmap_cross_validation.py --algorithm {wildcards.algorithm}'
 
-cross_validation_algorithms = ['decision_tree', 'random_forest', 'svm', 'adaptive_boosting']
+cross_validation_algorithms = ['decision_tree', 'svm', 'adaptive_boosting']
 
 rule heatmap_generate_results:
 	input: expand('charts/{algorithm}_heatmap.png', algorithm = cross_validation_algorithms)

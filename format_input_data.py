@@ -75,5 +75,7 @@ combined_missing_values_info.to_csv('charts/combined_missing_values_info.csv', i
 
 combined_heart_disease_data = pd.concat([cleveland_replaced, hungary_replaced, switzerland_replaced, virginia_replaced])
 combined_heart_disease_data.columns = ['age', 'sex', 'cp', 'trestbps', 'chol', 'gbs', 'restecg', 'thalach', 'exang', 'oldpeak', 'slope', 'ca', 'thal', 'num', 'origin']
+combined_heart_disease_data = combined_heart_disease_data.drop(['slope', 'ca'], axis=1)
+
 combined_heart_disease_data.to_csv('input_data/heart_disease_data_formatted.csv', index=None)
 

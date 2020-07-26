@@ -18,6 +18,7 @@ xgboost['algorithm']='Extreme_Gradient_Boosting'
 '''
 
 svm = pd.read_csv('output_cv/svm_cross_validation.csv')
+svm['hyperparameter'] = svm['cost'].astype(str) + ' ' + svm['kernel'].astype(str)
 svm['algorithm']='SVM'
 
 combined_cross_validation_data = pd.concat([decisiontree, adaboost, svm])

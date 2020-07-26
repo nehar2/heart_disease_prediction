@@ -1,0 +1,17 @@
+charts/decision_tree_heatmap.png
+charts/svm_heatmap.png
+charts/adaptive_boosting_heatmap.png
+output_cv/decision_tree_cross_validation.csv
+output_cv/svm_cross_validation.csv
+output_cv/adaptive_boosting_cross_validation.csv
+output_data/heart_disease_data_x_train.csv
+output_data/heart_disease_data_y_train.csv
+output_data/heart_disease_data_x_train.csv
+output_data/heart_disease_data_y_train.csv
+output_data/heart_disease_data_x_train.csv
+output_data/heart_disease_data_y_train.csv
+input_data/heart_disease_data_formatted.csv
+input_data/processed.cleveland.data
+input_data/processed.hungarian.data
+input_data/processed.switzerland.data
+input_data/processed.va.data
