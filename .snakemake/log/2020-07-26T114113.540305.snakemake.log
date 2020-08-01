@@ -15,3 +15,14 @@ rule heatmap_cross_validation:
     jobid: 2
     wildcards: algorithm=svm
 
+[Sun Jul 26 14:14:13 2020]
+Error in rule heatmap_cross_validation:
+    jobid: 2
+    output: charts/svm_heatmap.png
+    shell:
+        python heatmap_cross_validation.py --algorithm svm
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /Users/neha/Horizon/Horizon_Project/Heart_Disease/.snakemake/log/2020-07-26T114113.540305.snakemake.log

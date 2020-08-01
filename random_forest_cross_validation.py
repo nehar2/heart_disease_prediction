@@ -3,6 +3,10 @@ import pandas as pd
 import sklearn
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import cross_validate
+import warnings
+from tqdm import tqdm
+
+warnings.filterwarnings('ignore')
 
 x_train = pd.read_csv('output_data/heart_disease_data_x_train.csv', index_col='patientid_train')
 y_train = pd.read_csv('output_data/heart_disease_data_y_train.csv', index_col='patientid_train')
@@ -11,8 +15,8 @@ x_train = x_train.astype('category')
 
 cross_validation = {'min_samples_split':[], 'n_estimators':[], 'criterion':[], 'bootstrap':[], 'train_recall':[], 'train_precision':[], 'test_recall':[], 'test_precision':[]}
 
-for min_samples_split in range(2,10):
-	for n_estimators in range(10,20):
+for min_samples_split in tqdm(range(2,10)):
+	for n_estimators in range(10,15):
 		for criterion in ['entropy', 'gini']:
 			for bootstrap in [True, False]:
 				clf = RandomForestClassifier(min_samples_split=min_samples_split, n_estimators=n_estimators, criterion=criterion, bootstrap=bootstrap)
