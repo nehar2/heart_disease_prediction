@@ -11,13 +11,13 @@ warnings.filterwarnings('ignore')
 
 ### CROSS VALIDATION ###
 
-x_train = pd.read_csv('output_data/heart_disease_data_x_train.csv', index_col='patientid_train')
-y_train = pd.read_csv('output_data/heart_disease_data_y_train.csv', index_col='patientid_train')
+x_train = pd.read_csv('output_data/heart_disease_data_x_train_replaced.csv', index_col='patientid')
+y_train = pd.read_csv('output_data/heart_disease_data_y_train.csv', index_col='patientid')
 
 cross_validation = {'max_iter':[], 'solver':[], 'train_recall':[], 'train_precision':[], 'test_recall':[], 'test_precision':[]}
 
 for max_iter in tqdm(range(10,15)):
-    for solver in ['newton-cg','lbfgs','liblinear', 'sag', 'saga']:
+    for solver in tqdm(['newton-cg','lbfgs','liblinear', 'sag', 'saga']):
         clf = LogisticRegression(max_iter=max_iter, solver=solver)
         cross_val_object = cross_validate(clf, x_train, y_train['num'], cv=15, scoring=('recall_weighted', 'precision_weighted'), return_train_score=True)
         cross_validation['max_iter'].append(max_iter)
@@ -28,5 +28,4 @@ for max_iter in tqdm(range(10,15)):
         cross_validation['test_precision'].append(cross_val_object['test_precision_weighted'].mean())
 
 pd.DataFrame(cross_validation).to_csv('output_cv/logistic_regression_cross_validation.csv', index=None)
-
 

@@ -9,14 +9,14 @@ from tqdm import tqdm
 
 warnings.filterwarnings('ignore')
 
-x_train = pd.read_csv('output_data/heart_disease_data_x_train.csv', index_col='patientid_train')
-y_train = pd.read_csv('output_data/heart_disease_data_y_train.csv', index_col='patientid_train')
+x_train = pd.read_csv('output_data/heart_disease_data_x_train_replaced.csv', index_col='patientid')
+y_train = pd.read_csv('output_data/heart_disease_data_y_train.csv', index_col='patientid')
 
 cross_validation = {'n_estimators':[], 'max_depth':[], 'learning_rate':[], 'train_recall':[], 'train_precision':[], 'test_recall':[], 'test_precision':[]}
 
 for n_estimators in tqdm(range (10,15)):
-	for max_depth in range(1,3):
-		for learning_rate in range (90,100):
+	for max_depth in tqdm(range(1,3)):
+		for learning_rate in tqdm(range (90,100)):
 			learning_rate = learning_rate/100
 			clf = AdaBoostClassifier(n_estimators=n_estimators, learning_rate=learning_rate, base_estimator=tree.DecisionTreeClassifier(max_depth=max_depth))
 			cross_val_object = cross_validate(clf, x_train, y_train['num'], cv=15, scoring=('recall_weighted', 'precision_weighted'), return_train_score=True)

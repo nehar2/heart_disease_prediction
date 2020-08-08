@@ -16,35 +16,40 @@ rule train_test_split:
 	output: 'output_data/heart_disease_data_x_train.csv', 'output_data/heart_disease_data_x_test.csv', 'output_data/heart_disease_data_y_train.csv', 'output_data/heart_disease_data_y_test.csv'
 	shell: 'python train_test_split.py'
 
+rule replace_missing_values:
+	input: 'output_data/heart_disease_data_x_train.csv', 'output_data/heart_disease_data_x_test.csv', 'output_data/heart_disease_data_y_train.csv', 'output_data/heart_disease_data_y_test.csv'
+	output: 'output_data/heart_disease_data_x_train_replaced.csv', 'output_data/heart_disease_data_x_test_replaced.csv'
+	shell: 'python replace_missing_values.py'
+
 ### CROSS VALIDATIONS ###
 
 rule logistic_regression_cross_validation:
-	input: 'output_data/heart_disease_data_x_train.csv', 'output_data/heart_disease_data_y_train.csv'
+	input: 'output_data/heart_disease_data_x_train_replaced.csv', 'output_data/heart_disease_data_y_train.csv'
 	output: 'output_cv/logistic_regression_cross_validation.csv'
 	shell: 'python logistic_regression_cross_validation.py'
 
 rule decision_tree_cross_validation:
-	input: 'output_data/heart_disease_data_x_train.csv', 'output_data/heart_disease_data_y_train.csv'
+	input: 'output_data/heart_disease_data_x_train_replaced.csv', 'output_data/heart_disease_data_y_train.csv'
 	output: 'output_cv/decision_tree_cross_validation.csv'
 	shell: 'python decision_tree_cross_validation.py'
 
 rule random_forest_cross_validation:
-	input: 'output_data/heart_disease_data_x_train.csv', 'output_data/heart_disease_data_y_train.csv'
+	input: 'output_data/heart_disease_data_x_train_replaced.csv', 'output_data/heart_disease_data_y_train.csv'
 	output: 'output_cv/random_forest_cross_validation.csv'
 	shell: 'python random_forest_cross_validation.py'
 
 rule adaptive_boosting_cross_validation:
-	input: 'output_data/heart_disease_data_x_train.csv', 'output_data/heart_disease_data_y_train.csv'
+	input: 'output_data/heart_disease_data_x_train_replaced.csv', 'output_data/heart_disease_data_y_train.csv'
 	output: 'output_cv/adaptive_boosting_cross_validation.csv'
 	shell: 'python adaptive_boosting_cross_validation.py'
 
 rule xgboost_cross_validation:
-	input: 'output_data/heart_disease_data_x_train.csv', 'output_data/heart_disease_data_y_train.csv'
+	input: 'output_data/heart_disease_data_x_train_replaced.csv', 'output_data/heart_disease_data_y_train.csv'
 	output: 'output_cv/xgboost_cross_validation.csv'
 	shell: 'python xgboost_cross_validation.py'
 
 rule svm_cross_validation:
-	input: 'output_data/heart_disease_data_x_train.csv', 'output_data/heart_disease_data_y_train.csv'
+	input: 'output_data/heart_disease_data_x_train_replaced.csv', 'output_data/heart_disease_data_y_train.csv'
 	output: 'output_cv/svm_cross_validation.csv'
 	shell: 'python svm_cross_validation.py'
 
@@ -52,17 +57,17 @@ rule svm_cross_validation:
 
 rule logistic_regression_heatmap:
 	input: 'output_cv/logistic_regression_cross_validation.csv'
-	output: 'charts/logistic_regression_heatmap.png'
+	output: 'charts/logistic_regression_heatmap_1.png'
 	shell: 'python logistic_regression_heatmap.py'
 
 rule decision_tree_heatmap:
 	input: 'output_cv/decision_tree_cross_validation.csv'
-	output: 'charts/decision_tree_heatmap.png'
+	output: 'charts/decision_tree_heatmap_1.png'
 	shell: 'python decision_tree_heatmap.py'
 
 rule random_forest_heatmap:
 	input: 'output_cv/random_fores_cross_validation.csv'
-	output: 'charts/random_fores_heatmap.png'
+	output: 'charts/random_forest_heatmap.png'
 	shell: 'python random_forest_heatmap.py'
 
 rule adaptive_boosting_heatmap:
@@ -103,9 +108,5 @@ rule combined_results:
 		'output_cv/xgboost_cross_validation.csv', 'output_cv/svm_cross_validation.csv'
 	output: 'charts/combined_results.csv'
 	shell: 'python combined_results.py'
-
-
-
-
 
 

@@ -10,8 +10,8 @@ data.loc[data['num']==2, 'num'] = 'Moderate'
 data.loc[data['num']==3, 'num'] = 'High'
 data.loc[data['num']==4, 'num'] = 'Severe'
 
-sb.set(style='whitegrid')
-sb.countplot(data=data, x='num', hue='origin')
+sb.set(style='darkgrid')
+sb.countplot(data=data, x='num', hue='origin', order=['None', 'Low', 'Moderate', 'High', 'Severe'])
 plt.title('Heart Disease Prediction Values')
 plt.xlabel('Likelihood of Presence of Heart Disease')
 plt.ylabel('Number of Patients')

@@ -19,8 +19,6 @@ for column in range(0,14):
 cleveland_missing_values_table = pd.DataFrame(cleveland_missing_values)
 cleveland_missing_values_table['origin']='cleveland'
 
-cleveland_replaced = cleveland.fillna(cleveland.median())
-
 ### HUNGARY DATA ###
 hungary = pd.read_csv('input_data/processed.hungarian.data', header=None, na_values='?')
 hungary['origin']='Hungary'
@@ -34,8 +32,6 @@ for column in range(0,14):
     hungary_missing_values['percent_missing'].append(percent_missing)
 hungary_missing_values_table = pd.DataFrame(hungary_missing_values)
 hungary_missing_values_table['origin']='hungary'
-
-hungary_replaced = hungary.fillna(hungary.median())
 
 ### SWITZERLAND DATA ###
 switzerland = pd.read_csv('input_data/processed.switzerland.data', header=None, na_values='?')
@@ -51,8 +47,6 @@ for column in range(0,14):
 switzerland_missing_values_table = pd.DataFrame(switzerland_missing_values)
 switzerland_missing_values_table['origin']='switzerland'
 
-switzerland_replaced = switzerland.fillna(switzerland.median())
-
 ### VIRGINIA DATA ###
 virginia = pd.read_csv('input_data/processed.va.data', header=None, na_values='?')
 virginia['origin']='Virginia'
@@ -67,13 +61,11 @@ for column in range(0,14):
 virginia_missing_values_table = pd.DataFrame(virginia_missing_values)
 virginia_missing_values_table['origin']='virginia'
 
-virginia_replaced = virginia.fillna(virginia.median())
-
 ### COMBINING DATASETS ###
 combined_missing_values_info = pd.concat([cleveland_missing_values_table, hungary_missing_values_table, switzerland_missing_values_table, virginia_missing_values_table])
 combined_missing_values_info.to_csv('charts/combined_missing_values_info.csv', index=None)
 
-combined_heart_disease_data = pd.concat([cleveland_replaced, hungary_replaced, switzerland_replaced, virginia_replaced])
+combined_heart_disease_data = pd.concat([cleveland, hungary, switzerland, virginia])
 combined_heart_disease_data.columns = ['age', 'sex', 'cp', 'trestbps', 'chol', 'gbs', 'restecg', 'thalach', 'exang', 'oldpeak', 'slope', 'ca', 'thal', 'num', 'origin']
 
 ### DROPPING COLUMNS BASED ON MISSING VALUES ###

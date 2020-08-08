@@ -1,0 +1,85 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	adaptive_boosting_cross_validation
+	1	combined_results
+	1	decision_tree_cross_validation
+	1	logistic_regression_cross_validation
+	1	random_forest_cross_validation
+	1	svm_cross_validation
+	1	xgboost_cross_validation
+	7
+
+[Fri Aug  7 10:20:09 2020]
+rule logistic_regression_cross_validation:
+    input: output_data/heart_disease_data_x_train.csv, output_data/heart_disease_data_y_train.csv
+    output: output_cv/logistic_regression_cross_validation.csv
+    jobid: 1
+
+[Fri Aug  7 10:20:11 2020]
+Finished job 1.
+1 of 7 steps (14%) done
+
+[Fri Aug  7 10:20:11 2020]
+rule random_forest_cross_validation:
+    input: output_data/heart_disease_data_x_train.csv, output_data/heart_disease_data_y_train.csv
+    output: output_cv/random_forest_cross_validation.csv
+    jobid: 3
+
+[Fri Aug  7 10:20:28 2020]
+Finished job 3.
+2 of 7 steps (29%) done
+
+[Fri Aug  7 10:20:28 2020]
+rule xgboost_cross_validation:
+    input: output_data/heart_disease_data_x_train.csv, output_data/heart_disease_data_y_train.csv
+    output: output_cv/xgboost_cross_validation.csv
+    jobid: 5
+
+[Fri Aug  7 10:20:32 2020]
+Finished job 5.
+3 of 7 steps (43%) done
+
+[Fri Aug  7 10:20:32 2020]
+rule decision_tree_cross_validation:
+    input: output_data/heart_disease_data_x_train.csv, output_data/heart_disease_data_y_train.csv
+    output: output_cv/decision_tree_cross_validation.csv
+    jobid: 2
+
+[Fri Aug  7 10:20:35 2020]
+Finished job 2.
+4 of 7 steps (57%) done
+
+[Fri Aug  7 10:20:35 2020]
+rule adaptive_boosting_cross_validation:
+    input: output_data/heart_disease_data_x_train.csv, output_data/heart_disease_data_y_train.csv
+    output: output_cv/adaptive_boosting_cross_validation.csv
+    jobid: 4
+
+[Fri Aug  7 10:20:42 2020]
+Finished job 4.
+5 of 7 steps (71%) done
+
+[Fri Aug  7 10:20:42 2020]
+rule svm_cross_validation:
+    input: output_data/heart_disease_data_x_train.csv, output_data/heart_disease_data_y_train.csv
+    output: output_cv/svm_cross_validation.csv
+    jobid: 6
+
+[Fri Aug  7 10:20:44 2020]
+Finished job 6.
+6 of 7 steps (86%) done
+
+[Fri Aug  7 10:20:44 2020]
+rule combined_results:
+    input: output_cv/logistic_regression_cross_validation.csv, output_cv/decision_tree_cross_validation.csv, output_cv/random_forest_cross_validation.csv, output_cv/adaptive_boosting_cross_validation.csv, output_cv/xgboost_cross_validation.csv, output_cv/svm_cross_validation.csv
+    output: charts/combined_results.csv
+    jobid: 0
+
+[Fri Aug  7 10:20:45 2020]
+Finished job 0.
+7 of 7 steps (100%) done
+Complete log: /Users/neha/Horizon/Horizon_Project/Heart_Disease/.snakemake/log/2020-08-07T102009.014626.snakemake.log

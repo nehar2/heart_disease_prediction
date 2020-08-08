@@ -10,14 +10,14 @@ import pdb
 
 warnings.filterwarnings('ignore')
 
-x_train = pd.read_csv('output_data/heart_disease_data_x_train.csv', index_col='patientid_train')
-y_train = pd.read_csv('output_data/heart_disease_data_y_train.csv', index_col='patientid_train')
+x_train = pd.read_csv('output_data/heart_disease_data_x_train_replaced.csv', index_col='patientid')
+y_train = pd.read_csv('output_data/heart_disease_data_y_train.csv', index_col='patientid')
 
 cross_validation = {'n_jobs':[], 'max_depth':[], 'learning_rate':[], 'train_r2':[], 'test_r2':[]}
 
 for n_jobs in tqdm(range (10,15)):
 	for max_depth in tqdm(range(1,3)):
-		for learning_rate in tqdm(range (90,100)):
+		for learning_rate in tqdm(range (90,95)):
 			learning_rate = learning_rate/100
 			xgb_model = XGBClassifier(n_jobs=n_jobs, learning_rate=learning_rate, max_depth=max_depth)
 			cross_val_object = cross_validate(xgb_model, x_train, y_train['num'], cv=15, scoring=('r2'), return_train_score=True)
