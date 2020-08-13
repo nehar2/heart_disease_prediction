@@ -6,14 +6,14 @@ import matplotlib.pyplot as plt
 data = pd.read_csv('output_cv/logistic_regression_cross_validation.csv')
 data['validation_test_f1_score'] = 2*((data['test_recall']*data['test_precision'])/(data['test_recall']+data['test_precision']))
 
-### MAX_ITER & SOLVER ###
-data_formatted = data.pivot(index='max_iter', columns='solver' , values='validation_test_f1_score')
+### L1 Ratio & SOLVER ###
+data_formatted = data.pivot(index='l1_ratio', columns='solver' , values='validation_test_f1_score')
 
-heatmap = sb.heatmap(data_formatted, cmap="Blues", linewidths=.5)
+plt.figure(figsize=(4, 9))
+heatmap = sb.heatmap(data_formatted, cmap="Blues")
 heatmap.invert_yaxis()
-plt.title('Heatmap of Logistic Regression Performance')
+plt.subplots_adjust(left=0.2, bottom=0.2)
+plt.title('Logistic Regression Heatmap')
 plt.xlabel('Solver')
-plt.ylabel('Max Iterations')
-plt.legend().set_title('Validation Test F1 Score')
-
-plt.savefig('charts/logistic_regression_heatmap_1.png')
+plt.ylabel('L1 Ratio')
+plt.savefig('charts/logistic_regression_heatmap.png')

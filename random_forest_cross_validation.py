@@ -15,8 +15,8 @@ x_train = x_train.astype('category')
 
 cross_validation = {'min_samples_split':[], 'n_estimators':[], 'criterion':[], 'bootstrap':[], 'train_recall':[], 'train_precision':[], 'test_recall':[], 'test_precision':[]}
 
-for min_samples_split in tqdm(range(2,10)):
-	for n_estimators in tqdm(range(10,15)):
+for min_samples_split in tqdm(range(5,30)):
+	for n_estimators in tqdm(range(50,150)):
 		for criterion in tqdm(['entropy', 'gini']):
 			for bootstrap in tqdm([True, False]):
 				clf = RandomForestClassifier(min_samples_split=min_samples_split, n_estimators=n_estimators, criterion=criterion, bootstrap=bootstrap)

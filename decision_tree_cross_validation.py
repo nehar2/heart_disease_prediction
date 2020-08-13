@@ -13,7 +13,7 @@ y_train = pd.read_csv('output_data/heart_disease_data_y_train.csv', index_col='p
 
 cross_validation = {'min_samples_split':[], 'criterion':[], 'train_recall':[], 'train_precision':[], 'test_recall':[], 'test_precision':[]}
 
-for min_samples_split in tqdm(range(10,15)):
+for min_samples_split in tqdm(range(5, 30)):
 	for criterion in tqdm(['entropy', 'gini']):
 		clf = tree.DecisionTreeClassifier(min_samples_split=min_samples_split, criterion=criterion)
 		cross_val_object = cross_validate(clf, x_train, y_train['num'], cv=15, scoring=('recall_weighted', 'precision_weighted'), return_train_score=True)

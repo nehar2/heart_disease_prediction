@@ -1,0 +1,92 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 2
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	adaptive_boosting_cross_validation
+	1	combined_results
+	1	decision_tree_cross_validation
+	1	logistic_regression_cross_validation
+	1	random_forest_cross_validation
+	1	svm_cross_validation
+	1	xgboost_cross_validation
+	7
+
+[Sat Aug  8 09:51:50 2020]
+rule logistic_regression_cross_validation:
+    input: output_data/heart_disease_data_x_train_replaced.csv, output_data/heart_disease_data_y_train.csv
+    output: output_cv/logistic_regression_cross_validation.csv
+    jobid: 1
+
+
+[Sat Aug  8 09:51:50 2020]
+rule random_forest_cross_validation:
+    input: output_data/heart_disease_data_x_train_replaced.csv, output_data/heart_disease_data_y_train.csv
+    output: output_cv/random_forest_cross_validation.csv
+    jobid: 3
+
+[Sat Aug  8 10:09:31 2020]
+Finished job 1.
+1 of 7 steps (14%) done
+
+[Sat Aug  8 10:09:31 2020]
+rule xgboost_cross_validation:
+    input: output_data/heart_disease_data_x_train_replaced.csv, output_data/heart_disease_data_y_train.csv
+    output: output_cv/xgboost_cross_validation.csv
+    jobid: 5
+
+[Sat Aug  8 10:11:52 2020]
+Finished job 5.
+2 of 7 steps (29%) done
+
+[Sat Aug  8 10:11:52 2020]
+rule decision_tree_cross_validation:
+    input: output_data/heart_disease_data_x_train_replaced.csv, output_data/heart_disease_data_y_train.csv
+    output: output_cv/decision_tree_cross_validation.csv
+    jobid: 2
+
+[Sat Aug  8 10:12:02 2020]
+Finished job 2.
+3 of 7 steps (43%) done
+
+[Sat Aug  8 10:12:02 2020]
+rule adaptive_boosting_cross_validation:
+    input: output_data/heart_disease_data_x_train_replaced.csv, output_data/heart_disease_data_y_train.csv
+    output: output_cv/adaptive_boosting_cross_validation.csv
+    jobid: 4
+
+[Sat Aug  8 10:14:54 2020]
+Finished job 4.
+4 of 7 steps (57%) done
+
+[Sat Aug  8 10:14:54 2020]
+rule svm_cross_validation:
+    input: output_data/heart_disease_data_x_train_replaced.csv, output_data/heart_disease_data_y_train.csv
+    output: output_cv/svm_cross_validation.csv
+    jobid: 6
+
+[Sat Aug  8 11:00:19 2020]
+Finished job 6.
+5 of 7 steps (71%) done
+[Sat Aug  8 21:37:07 2020]
+Finished job 3.
+6 of 7 steps (86%) done
+
+[Sat Aug  8 21:37:07 2020]
+rule combined_results:
+    input: output_cv/logistic_regression_cross_validation.csv, output_cv/decision_tree_cross_validation.csv, output_cv/random_forest_cross_validation.csv, output_cv/adaptive_boosting_cross_validation.csv, output_cv/xgboost_cross_validation.csv, output_cv/svm_cross_validation.csv
+    output: charts/combined_results.csv
+    jobid: 0
+
+[Sat Aug  8 21:37:08 2020]
+Error in rule combined_results:
+    jobid: 0
+    output: charts/combined_results.csv
+    shell:
+        python combined_results.py
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /Users/neha/Horizon/Horizon_Project/Heart_Disease/.snakemake/log/2020-08-08T095150.080183.snakemake.log

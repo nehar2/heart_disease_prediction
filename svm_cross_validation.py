@@ -13,8 +13,8 @@ y_train = pd.read_csv('output_data/heart_disease_data_y_train.csv', index_col='p
 
 cross_validation = {'kernel':[], 'cost':[], 'train_recall':[], 'train_precision':[], 'test_recall':[], 'test_precision':[]}
 
-for cost in tqdm(range(1,5)):
-    cost = cost/10
+for cost in tqdm(range(1,1000)):
+    cost = cost/100
     for kernel in tqdm(['poly','rbf','sigmoid']):
         clf = svm.SVC(kernel=kernel, C=cost)
         cross_val_object = cross_validate(clf, x_train, y_train['num'], cv=15, scoring=('recall_weighted', 'precision_weighted'), return_train_score=True)

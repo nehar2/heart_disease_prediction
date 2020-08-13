@@ -57,27 +57,27 @@ rule svm_cross_validation:
 
 rule logistic_regression_heatmap:
 	input: 'output_cv/logistic_regression_cross_validation.csv'
-	output: 'charts/logistic_regression_heatmap_1.png'
+	output: 'charts/logistic_regression_heatmap.png'
 	shell: 'python logistic_regression_heatmap.py'
 
 rule decision_tree_heatmap:
 	input: 'output_cv/decision_tree_cross_validation.csv'
-	output: 'charts/decision_tree_heatmap_1.png'
+	output: 'charts/decision_tree_heatmap.png'
 	shell: 'python decision_tree_heatmap.py'
 
 rule random_forest_heatmap:
-	input: 'output_cv/random_fores_cross_validation.csv'
-	output: 'charts/random_forest_heatmap.png'
+	input: 'output_cv/random_forest_cross_validation.csv'
+	output: 'charts/random_forest_heatmap_1.png', 'charts/random_forest_heatmap_2.png', 'charts/random_forest_heatmap_3.png', 'charts/random_forest_heatmap_4.png'
 	shell: 'python random_forest_heatmap.py'
 
 rule adaptive_boosting_heatmap:
 	input: 'output_cv/adaptive_boosting_cross_validation.csv'
-	output: 'charts/adaptive_boosting_heatmap.png'
+	output: 'charts/adaptive_boosting_heatmap_1.png', 'charts/adaptive_boosting_heatmap_2.png'
 	shell: 'python adaptive_boosting_heatmap.py'
 
 rule xgboost_heatmap:
 	input: 'output_cv/xgboost_cross_validation.csv'
-	output: 'charts/xgboost_heatmap.png'
+	output: 'charts/xgboost_heatmap_1.png', 'charts/xgboost_heatmap_2.png'
 	shell: 'python xgboost_heatmap.py'
 
 rule svm_heatmap:
@@ -85,28 +85,21 @@ rule svm_heatmap:
 	output: 'charts/svm_heatmap.png'
 	shell: 'python svm_heatmap.py'
 
-'''
-rule heatmap_cross_validation:
-	input: 'output_cv/{algorithm}_cross_validation.csv'
-	output: 'charts/{algorithm}_heatmap.png'
-	shell: 'python heatmap_cross_validation.py --algorithm {wildcards.algorithm}'
-
-cross_validation_algorithms = ['logistic_regression', 'decision_tree', 'random_forest', 'adaptive_boosting', 'xgboost', 'svm']
-
-rule heatmap_generate_results:
-	input: expand('charts/{algorithm}_heatmap.png', algorithm = cross_validation_algorithms)
-	output: 'charts/heatmap_complete.txt'
-	shell: 'echo complete > {output}'
-'''
-
 ### RESULTS ###
 
-rule combined_results:
+rule combined_cross_validation_results:
 	input: 
 		'output_cv/logistic_regression_cross_validation.csv', 'output_cv/decision_tree_cross_validation.csv', 
 		'output_cv/random_forest_cross_validation.csv', 'output_cv/adaptive_boosting_cross_validation.csv', 
 		'output_cv/xgboost_cross_validation.csv', 'output_cv/svm_cross_validation.csv'
-	output: 'charts/combined_results.csv'
-	shell: 'python combined_results.py'
+	output: 'charts/combined_cross_validation_results.csv'
+	shell: 'python combined_cross_validation_results.py'
+
+rule testing_set:
+	input: 'output_data/heart_disease_data_x_train_replaced.csv', 'output_data/heart_disease_data_y_train.csv', 'output_data/heart_disease_data_x_test_replaced.csv', 'output_data/heart_disease_data_y_test.csv'
+	output: 'charts/testing_set_scores.csv'
+	shell: 'python testing_set.py'
+	
+
 
 
