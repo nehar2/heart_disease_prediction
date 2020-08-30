@@ -97,9 +97,22 @@ rule combined_cross_validation_results:
 
 rule testing_set:
 	input: 'output_data/heart_disease_data_x_train_replaced.csv', 'output_data/heart_disease_data_y_train.csv', 'output_data/heart_disease_data_x_test_replaced.csv', 'output_data/heart_disease_data_y_test.csv'
-	output: 'charts/testing_set_scores.csv'
+	output: 'charts/testing_set_scores.csv', 'pickle_files/adaptive_boosting_model.pickle', 'pickle_files/logistic_regression_model.pickle', 'pickle_files/xgboost_model.pickle'
 	shell: 'python testing_set.py'
-	
 
+rule adaptive_boosting_model_performance:
+	input: 'output_data/heart_disease_data_x_train_replaced.csv', 'output_data/heart_disease_data_x_test_replaced.csv', 'output_data/heart_disease_data_y_train.csv', 'output_data/heart_disease_data_y_test.csv'
+	output: 'charts/adaptive_boosting_model_performance.csv'
+	shell: 'python adaptive_boosting_model_performance.py'
+	
+rule xgboost_model_performance:
+	input: 'output_data/heart_disease_data_x_train_replaced.csv', 'output_data/heart_disease_data_x_test_replaced.csv', 'output_data/heart_disease_data_y_train.csv', 'output_data/heart_disease_data_y_test.csv'
+	output: 'charts/xgboost_model_performance.csv'
+	shell: 'python xgboost_model_performance.py'
+
+rule logistic_regression_model_performance:
+	input: 'output_data/heart_disease_data_x_train_replaced.csv', 'output_data/heart_disease_data_x_test_replaced.csv', 'output_data/heart_disease_data_y_train.csv', 'output_data/heart_disease_data_y_test.csv'
+	output: 'charts/logistic_regression_model_performance.csv'
+	shell: 'python logistic_regression_model_performance.py'
 
 
